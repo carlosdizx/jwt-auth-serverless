@@ -1,0 +1,6 @@
+admin-platform:
+  handler: src/functions/users/create-user.handler
+  events:
+    - httpApi:
+        path: /users/admin
+        method: POST
