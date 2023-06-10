@@ -6,7 +6,7 @@ import {
   JoinTable,
 } from "typeorm";
 import User from "./user.entity";
-import { TypesUser } from "../enums/types.user";
+import { TypesRoles } from "../enums/types.roles";
 
 @Entity({ name: "roles" })
 export default class Role {
@@ -15,11 +15,11 @@ export default class Role {
 
   @Column({
     type: "enum",
-    enum: TypesUser,
-    default: TypesUser.USER,
+    enum: TypesRoles,
+    default: TypesRoles.USER,
     unique: true,
   })
-  name: TypesUser;
+  name: TypesRoles;
 
   @Column({ name: "description", type: "varchar", unique: true })
   description: string;
