@@ -1,0 +1,30 @@
+service: jwt-auth-serverless
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+
+plugins:
+  - serverless-esbuild
+  - serverless-offline
+
+custom:
+  esbuild:
+    minify: true
+    external:
+      - reflect-metadata
+      - typeorm
+      - bcryptjs
+      - jsonwebtoken
+      - middy
+      - middy/core
+      - middy/http-json-body-parser
+      - middy/http-header-normalizer
+      - lambda-proxy-utils
+    watch:
+      pattern: [ './index.ts', 'src/**/*.ts' ]
+      ignore: [ '.serverless/**/*', '.build' ]
+  dotenv:
+    path: env.yml
+functions:
+  - ${file(./src/functions/users/index.functions.yml)}

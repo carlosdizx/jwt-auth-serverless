@@ -1,0 +1,38 @@
+{
+  "name": "jwt-auth-servrless",
+  "version": "1.0.0",
+  "description": "Challenge Kalo - Backend Engineer",
+  "scripts": {
+    "test": "echo \"No test specified\"",
+    "lambda:dev": "rimraf .build && serverless offline start --stage dev",
+    "deploy:dev": "rimraf .serverless && serverless deploy --stage dev --verbose",
+    "deploy:stage": "rimraf .serverless && serverless deploy --stage dev --verbose",
+    "format": "prettier --write \"src/**/**/*.ts\" \"test/**/**/*.ts\"",
+    "install:database": "docker-compose down -v && rimraf .\\postgres-data\\ && docker-compose up -d"
+  },
+  "author": "Carlos Ernesto Diaz Basante",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@middy/core": "^4.2.5",
+    "@middy/http-header-normalizer": "^4.5.0",
+    "@middy/http-json-body-parser": "^4.4.3",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.0",
+    "lambda-proxy-utils": "^3.0.3",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.15"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.117",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/jsonwebtoken": "^9.0.2",
+    "@types/node": "^16.18.25",
+    "esbuild": "^0.17.18",
+    "prettier": "^2.8.8",
+    "rimraf": "^5.0.0",
+    "serverless-esbuild": "^1.44.0",
+    "serverless-offline": "^12.0.4",
+    "typescript": "^5.0.4"
+  }
+}
