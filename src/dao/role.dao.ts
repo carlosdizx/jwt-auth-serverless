@@ -1,26 +1,26 @@
-import { Repository } from "typeorm";
 import repository from "../utils/databaseConnection";
+import { Repository } from "typeorm";
 import Role from "../entities/role.entity";
 
 export default class RoleDao {
-  private roleRepository: Repository<Role>;
-
-  constructor() {
-    this.initialize().then();
+  private static async getRepository(): Promise<Repository<Role>> {
+    return await repository(Role);
   }
 
-  private async initialize() {
-    this.roleRepository = await repository(Role);
-  }
-
-  public getRolesByIds = (ids: string[]) => {
-    return this.roleRepository
-      .createQueryBuilder("role")
-      .where("role.id IN (:...ids)", { ids })
-      .getMany();
+  public static findRolesByIds = async (ids: string[]) => {
+    const roleRepository = await RoleDao.getRepository();
+    try {
+      return roleRepository
+        .createQueryBuilder("role")
+        .where("role.id IN (:...ids)", { ids })
+        .getMany();
+    } catch (e) {
+      return [];
+    }
   };
 
-  public getRoleById = async (id: string): Promise<Role | undefined> => {
-    return this.roleRepository.findOne({ where: { id } });
+  public static findRoleById = async (id: string) => {
+    const roleRepository = await RoleDao.getRepository();
+    return roleRepository.findOne({ where: { id } });
   };
 }

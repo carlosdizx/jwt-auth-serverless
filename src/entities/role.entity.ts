@@ -8,7 +8,7 @@ import {
 import User from "./user.entity";
 import { TypesUser } from "../enums/types.user";
 
-@Entity()
+@Entity({ name: "roles" })
 export default class Role {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
@@ -17,10 +17,11 @@ export default class Role {
     type: "enum",
     enum: TypesUser,
     default: TypesUser.USER,
+    unique: true,
   })
   name: TypesUser;
 
-  @Column()
+  @Column({ name: "description", type: "varchar", unique: true })
   description: string;
 
   @ManyToMany(() => User)
