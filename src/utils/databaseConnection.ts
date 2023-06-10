@@ -2,29 +2,29 @@ import "reflect-metadata";
 import {DataSource, EntityTarget} from "typeorm";
 import dotenv = require("dotenv");
 import User from "../entities/user.entity";
-import {Role} from "../entities/role.entity";
+import Role from "../entities/role.entity";
 dotenv.config();
 
 const host = process.env.IS_OFFLINE
-  ? process.env.LOCAL_DB_MYSQL_HOST
-  : process.env.PROD_DB_MYSQL_HOST;
+  ? process.env.LOCAL_DB_POSTGRES_HOST
+  : process.env.PROD_DB_POSTGRES_HOST;
 const port = parseInt(
   process.env.IS_OFFLINE
-    ? process.env.LOCAL_DB_MYSQL_PORT
-    : process.env.PROD_DB_MYSQL_PORT
+    ? process.env.LOCAL_DB_POSTGRES_PORT
+    : process.env.PROD_DB_POSTGRES_PORT
 );
 const username = process.env.IS_OFFLINE
-  ? process.env.LOCAL_DB_MYSQL_USER
-  : process.env.PROD_DB_MYSQL_USER;
+  ? process.env.LOCAL_DB_POSTGRES_USER
+  : process.env.PROD_DB_POSTGRES_USER;
 const password = process.env.IS_OFFLINE
-  ? process.env.LOCAL_DB_MYSQL_PASSWORD
-  : process.env.PROD_DB_MYSQL_PASSWORD;
+  ? process.env.LOCAL_DB_POSTGRES_PASSWORD
+  : process.env.PROD_DB_POSTGRES_PASSWORD;
 const database = process.env.IS_OFFLINE
-  ? process.env.LOCAL_DB_MYSQL_DATABASE
-  : process.env.PROD_DB_MYSQL_DATABASE;
+  ? process.env.LOCAL_DB_POSTGRES_DATABASE
+  : process.env.PROD_DB_POSTGRES_DATABASE;
 
 const dataSource = new DataSource({
-  type: "mysql",
+  type: "postgres",
   host,
   port,
   username,

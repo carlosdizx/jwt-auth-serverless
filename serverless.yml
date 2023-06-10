@@ -3,6 +3,7 @@ service: jwt-auth-serverless
 provider:
   name: aws
   runtime: nodejs16.x
+  timeout: 200
 
 plugins:
   - serverless-esbuild
