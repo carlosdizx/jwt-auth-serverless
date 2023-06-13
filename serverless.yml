@@ -29,3 +29,4 @@ custom:
     path: env.yml
 functions:
   - ${file(./src/functions/users/index.functions.yml)}
+  - ${file(./src/functions/auth/index.functions.yml)}

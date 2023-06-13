@@ -1,5 +1,6 @@
-import {Entity, PrimaryGeneratedColumn, BaseEntity, Column, ManyToMany, JoinTable} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, BaseEntity, Column, ManyToMany, JoinTable, OneToOne, JoinColumn} from "typeorm";
 import Role from "./role.entity";
+import UserProfile from "./user.profile.entity";
 
 @Entity({ name: "users" })
 export default class User extends BaseEntity {
@@ -11,6 +12,10 @@ export default class User extends BaseEntity {
 
   @Column({ name: "password", type: "varchar" })
   password: string;
+
+  @OneToOne(() => UserProfile)
+  @JoinColumn({ name: "profile_id" })
+  profile: UserProfile;
 
   @ManyToMany(() => Role)
   @JoinTable()

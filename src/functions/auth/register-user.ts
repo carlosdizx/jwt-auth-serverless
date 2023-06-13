@@ -9,16 +9,29 @@ import responseLambda from "../../utils/response";
 const originalHandler: APIGatewayProxyHandler = async (event: any, context) => {
   console.log(`HANDLER: Starting ${context.functionName}...`);
 
-  const { email, password, rolesIds } = event.body;
-
-  if(rolesIds.length === 0)
-    return responseLambda(400, { message: "Invalid roles" });
-
-  return await UsersCrudService.createUser({ email, password, rolesIds });
+  const { email, password, firstName, lastName, documentNumber, documentType } =
+    event.body;
+  return responseLambda(200, {
+    email,
+    password,
+    firstName,
+    lastName,
+    documentNumber,
+    documentType,
+  });
 };
 
 export const handler = middy()
   .use(httpHeaderNormalizer())
   .use(httpJsonBodyParser())
-  .use(hasBodyValid(["email", "password", "rolesIds"]))
+  .use(
+    hasBodyValid([
+      "email",
+      "password",
+      "firstName",
+      "lastName",
+      "documentNumber",
+      "documentType",
+    ])
+  )
   .handler(originalHandler);
