@@ -1,4 +1,4 @@
-admin-platform:
+create-user:
   handler: src/functions/users/create-user.handler
   events:
     - httpApi:

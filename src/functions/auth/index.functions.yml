@@ -1,4 +1,4 @@
-admin-platform:
+register-user:
   handler: src/functions/auth/register-user.handler
   events:
     - httpApi:
