@@ -1,0 +1,6 @@
+admin-platform:
+  handler: src/functions/auth/register-user.handler
+  events:
+    - httpApi:
+        path: /auth/register
+        method: POST
