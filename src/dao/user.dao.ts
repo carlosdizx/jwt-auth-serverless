@@ -1,13 +1,18 @@
 import User from "../entities/user.entity";
 import repository from "../utils/databaseConnection";
 import Role from "../entities/role.entity";
+import UserProfile from "../entities/user.profile.entity";
 
 export default class UserDao {
-  private static getRepository = async () =>{
+  private static getRepository = async () => {
     return await repository(User);
-  }
+  };
 
-  public static create = async (email: string, password: string, roles: Role[]) => {
+  public static create = async (
+    email: string,
+    password: string,
+    roles: Role[]
+  ) => {
     const repository = await this.getRepository();
     const user = repository.create({ email, password, roles });
     return repository.save(user);
@@ -23,7 +28,11 @@ export default class UserDao {
     return repository.find();
   };
 
-  public static update = async (userId: string, roles?: Role[], password?: string) => {
+  public static update = async (
+    userId: string,
+    roles?: Role[],
+    password?: string
+  ) => {
     const repository = await this.getRepository();
     const user = await repository.findOne({ where: { id: userId } });
 
@@ -32,5 +41,14 @@ export default class UserDao {
     if (password) user.password = password;
 
     return repository.save(user);
+  };
+
+  public static createProfile = async (
+    user: User,
+    userProfile: UserProfile
+  ) => {
+    const repository = await this.getRepository();
+    user.profile = userProfile;
+    return await repository.save(user);
   };
 }

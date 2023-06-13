@@ -37,12 +37,13 @@ export default class UsersCrudService {
         documentType,
         user
       );
+      await UserDao.createProfile(user, userProfile);
       return responseLambda(200, {
         message: "User created successfully",
         email,
         roles: roles.map((role) => role.description),
         id: user.id,
-        userProfile
+        name: `${firstName} ${lastName}`,
       });
     } catch (error) {
       console.error(error);
