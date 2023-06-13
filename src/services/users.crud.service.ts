@@ -1,16 +1,25 @@
 import UserDao from "../dao/user.dao";
 import RoleDao from "../dao/role.dao";
 import responseLambda from "../utils/response";
+import { DocumentType } from "../enums/types.document";
 
 export default class UsersCrudService {
   public static createUser = async ({
     email,
     password,
     rolesIds,
+    firstName,
+    lastName,
+    documentNumber,
+    documentType,
   }: {
     email: string;
     password: string;
     rolesIds: string[];
+    firstName: string;
+    lastName: string;
+    documentNumber: string;
+    documentType: DocumentType;
   }) => {
     try {
       const userFound = await UserDao.findByEmail(email);
@@ -23,12 +32,15 @@ export default class UsersCrudService {
       return responseLambda(200, {
         message: "User created successfully",
         email,
-        roles: roles.map(role => role.description),
+        roles: roles.map((role) => role.description),
         id: user.id,
       });
     } catch (error) {
       console.error(error);
-      return responseLambda(500, { message: "Error creating user, verify properties", error });
+      return responseLambda(500, {
+        message: "Error creating user, verify properties",
+        error,
+      });
     }
   };
 }
