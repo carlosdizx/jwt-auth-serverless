@@ -1,8 +1,9 @@
 import "reflect-metadata";
-import {DataSource, EntityTarget} from "typeorm";
+import { DataSource, EntityTarget } from "typeorm";
 import dotenv = require("dotenv");
 import User from "../entities/user.entity";
 import Role from "../entities/role.entity";
+import UserProfile from "../entities/user.profile.entity";
 dotenv.config();
 
 const host = process.env.IS_OFFLINE
@@ -31,7 +32,7 @@ const dataSource = new DataSource({
   password,
   database,
   synchronize: true,
-  entities: [User, Role],
+  entities: [User, Role, UserProfile],
 });
 
 const getConnect = async () => {
@@ -42,7 +43,6 @@ const getConnect = async () => {
   console.log("Successfully connected!");
   return dataSource;
 };
-
 
 const repository = async <T>(entity: EntityTarget<T>) => {
   const datasource = await getConnect();

@@ -2,6 +2,7 @@ import UserDao from "../dao/user.dao";
 import RoleDao from "../dao/role.dao";
 import responseLambda from "../utils/response";
 import { DocumentType } from "../enums/types.document";
+import UserProfileDao from "../dao/user.profile.dao";
 
 export default class UsersCrudService {
   public static createUser = async ({
@@ -29,11 +30,19 @@ export default class UsersCrudService {
       if (roles.length === 0)
         return responseLambda(400, { message: "Roles are not found" });
       const user = await UserDao.create(email, password, roles);
+      const userProfile = await UserProfileDao.create(
+        firstName,
+        lastName,
+        documentNumber,
+        documentType,
+        user
+      );
       return responseLambda(200, {
         message: "User created successfully",
         email,
         roles: roles.map((role) => role.description),
         id: user.id,
+        userProfile
       });
     } catch (error) {
       console.error(error);
