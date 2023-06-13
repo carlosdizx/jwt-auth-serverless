@@ -9,15 +9,15 @@ import responseLambda from "../../utils/response";
 const originalHandler: APIGatewayProxyHandler = async (event: any, context) => {
   console.log(`HANDLER: Starting ${context.functionName}...`);
 
-  const { email, password, firstName, lastName, documentNumber, documentType } =
-    event.body;
+  const { email, password, firstName, lastName, documentNumber } = event.body;
+
+
   return responseLambda(200, {
     email,
     password,
     firstName,
     lastName,
     documentNumber,
-    documentType,
   });
 };
 

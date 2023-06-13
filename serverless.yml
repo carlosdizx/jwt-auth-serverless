@@ -23,8 +23,8 @@ custom:
       - middy/http-header-normalizer
       - lambda-proxy-utils
     watch:
-      pattern: [ './index.ts', 'src/**/*.ts' ]
-      ignore: [ '.serverless/**/*', '.build' ]
+      pattern: ["./index.ts", "src/**/*.ts"]
+      ignore: [".serverless/**/*", ".build"]
   dotenv:
     path: env.yml
 functions:
